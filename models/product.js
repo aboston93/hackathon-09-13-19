@@ -47,7 +47,7 @@ const ProductSchema = new mongoose.Schema({
  * NOTE: skip this if you are not using mongoose
  *
  */
-const ProductCollection = mongoose.model('Products', ProductDetailSchema)
+const ProductCollection = mongoose.model('Products', ProductSchema)
 
 /* Step 4
  *
