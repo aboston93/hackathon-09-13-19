@@ -1,0 +1,19 @@
+<h1>COWBELL'S CLEAN CANDY</h1>
+<form method="POST" action="/products"></form>
+    <h3>Search by Candy Name</h3>
+    <label for="seachString">Name</label>
+    <input type="text" name="Write Begining of Product Name"/>
+<br>
+    <input type="submit" value="Search"/>
+</form>
+
+<ul>
+    {{#each products}}
+        <li>
+            <a href="/product/{{_id}}">{{name}}</a>
+        </li>
+    {{/each}}
+</ul>
+
+    <input type="submit" value="Delete No Name Person"/>
+</form>

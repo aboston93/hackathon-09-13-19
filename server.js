@@ -17,7 +17,7 @@ const methodOverride = require('method-override')
  * import routers from controllers/
  *
  */
-const { productRouter } = require('./controllers/product-detail.js')
+const { productRouter } = require('./controllers/product.js')
 
 
 /* Step 3
@@ -69,7 +69,7 @@ app.use('/', productRouter)
  *
  * NOTE: keep these lines at the bottom of the file 
  */
-const PORT = process.env.PORT || 3000 
+const PORT = process.env.PORT || 9999 
 
 /* Step 6
  *
