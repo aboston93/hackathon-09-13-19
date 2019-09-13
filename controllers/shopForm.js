@@ -3,48 +3,60 @@
  */
 const express = require('express')
 
-/* Step 2
- *
- * Import the api files from the models
- *
- * TODO: change the file path to the models file you'll need to use.
- * TODO: rename this from `templateApi` to something more sensible (e.g:
- * `shopsAPI`)
- *
- * NOTE: You may need to import more than one API to create the 
- * controller you need.
- * 
- */
-const templateApi = require('../models/template.js')
 
-/* Step 3 
- * 
- * Create a new router.
- *
- * the router will "contain" all the request handlers that you define in this file.
- * TODO: rename this from templateRouter to something that makes sense. (e.g:
- * `shopRouter`)
- */
-const templateRouter = express.Router()
+const shopFormApi = require("../models/shopForm.js")
 
-/* Step 4
- * 
- * TODO: Put all request handlers here
- */
+const shopFormRouter = express.Router()
 
-/* Step 5
- *
- * TODO: delete this handler; it's just a sample
- */ 
-templateRouter.get('/', (req, res) => {
-  res.send(templateApi.getHelloWorldString())
+
+// get all companies
+shopFormRouter.get("/shopForm", function (req, res) {
+  shopFormApi.getCartIems()
+    .then((allshopForm) => {
+      res.render("shopForm/editShopForm.hbs", {allshopForm})
+    })
+    .catch((error) => {
+      console.log(error) //will show error in console
+    })
 })
 
-/* Step 6
- *
- * Export the router from the file.
- *
- */
+// render createForm
+// shopFormRouter.get("/shopForm/add", function (req, res) {
+//   res.render("bookTitles/createBookTitles", {})
+// })
+
+// get one company by shopFormId
+// shopFormRouter.get("/shopForm/:shopFormId", function (req, res) {
+//   shopFormApi.getOneshopForm(req.params.shopFormId)
+//     .then((shopFormFromDb) => {
+//       res.render("bookTitles/oneBook", { _id: req.params.shopFormId, shopFormFromDb })
+//     })
+//     .catch((error) => {
+//       console.log(error) //will show error in console
+//     })
+// })
+
+shopFormRouter.put("/shopForm/:shopFormId", function (req, res) {
+  shopFormApi.updateshopForm(req.params.shopFormId, req.body)
+  .then(() => {
+    res.redirect("/shopForm")
+  })
+  .catch((error) => {
+    console.log(error) //will show error in console
+  })
+})
+
+shopFormRouter.delete("/shopForm/:shopFormId", function (req, res) {
+  shopFormApi.deleteCartItem(req.params.shopFormId)
+  .then(() => {
+    res.redirect("/shopForm") //redirects to "/", can use any url, etc.
+  })
+  .catch((error) => {
+    console.log(error) //will show error in console
+  })
+})
+
+
 module.exports = {
-  templateRouter
+  shopFormRouter
 }
